@@ -1,0 +1,27 @@
+{
+  "name": "playwrite_ostad",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "runAll": "npx playwright test --headed",
+    "runSequence": "npx playwright test tests/Senario_01.spec.js tests/Senario_02.spec.js tests/Senario_03.spec.js --headed",
+    "Senario_1": "npx playwright test --headed Senario_01.spec.js",
+    "Senario_2": "npx playwright test --headed Senario_02.spec.js",
+    "Senario_3": "npx playwright test --headed Senario_03.spec.js",
+    "show_repo": "npx playwright show-report",
+    "getreport" : "npx allure generate allure-results --clean && npx allure open allure-report",
+    // "Api_run" : "newman run "C:\Users\sazia\OneDrive\Desktop\PLAYWRITE_OSTAD\Api_testing\02_Api_test.json""
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.5.2"
+  },
+  "dependencies": {
+    "allure-commandline": "^2.41.0",
+    "allure-playwright": "^3.8.0"
+  }
+}

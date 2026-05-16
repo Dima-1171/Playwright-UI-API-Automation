@@ -1,0 +1,558 @@
+{
+  "info": {
+    "_postman_id": "b089e666-52b0-49e1-b9cd-b8947ccfe6fd",
+    "name": "Assignment_02",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51322696",
+    "_collection_link": "https://go.postman.co/collection/51322696-b089e666-52b0-49e1-b9cd-b8947ccfe6fd?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "pub_c49eb0fb4b0ecd23b95262cc91631b8052f02962f5e13eb35622f4569784f6ed",
+            "type": "text"
+          },
+          {
+            "key": "",
+            "value": "",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "\r\n{\r\n\"email\": \"saziaafrin711@gmail.com\",\r\n\"project_slug\": \"new-orbit-stream\",\r\n\"project_id\": \"20810\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://reqres.in/api/app-users/login",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "app-users",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login_varify",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "pub_c49eb0fb4b0ecd23b95262cc91631b8052f02962f5e13eb35622f4569784f6ed",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"token\":\"69602729\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://reqres.in/api/app-users/verify",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "app-users",
+            "verify"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get_user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "x-api-key",
+            "value": "pub_c49eb0fb4b0ecd23b95262cc91631b8052f02962f5e13eb35622f4569784f6ed",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://reqres.in/api/app-users?project_id=20810",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "app-users"
+          ],
+          "query": [
+            {
+              "key": "project_id",
+              "value": "20810"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update_user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"updatedAt field is present\", function () {\r",
+              "    pm.expect(jsonData).to.have.property('updatedAt');\r",
+              "});\r",
+              "\r",
+              "\r",
+              "pm.test(\"updatedAt is in correct format\", function () {\r",
+              "    pm.expect(jsonData.updatedAt).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z$/);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"updatedAt is recent\", function () {\r",
+              "    const updatedAt = new Date(jsonData.updatedAt);\r",
+              "    const now = new Date();\r",
+              "    pm.expect(now - updatedAt).to.be.below(5000); \r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.globals.set(\"requestTime\", new Date().toISOString());"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "pub_c49eb0fb4b0ecd23b95262cc91631b8052f02962f5e13eb35622f4569784f6ed",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": 2,\r\n  \"email\": \"janet.weaver@reqres.in\",\r\n  \"first_name\": \"janeeeeeeee\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://reqres.in/api/users/2",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "users",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "single_field",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var responseBody = pm.response.json();\r",
+              "\r",
+              "console.log(responseBody);\r",
+              "\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "const UpdateName = pm.collectionVariables.get(\"updatedFirstname\");\r",
+              "\r",
+              "pm.test(\"First name is updated correctly\", () => {\r",
+              "    pm.expect(responseBody.first_name).to.eql(UpdateName);\r",
+              "});\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"updatedFirstname\", \"Mikkie\");\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "pub_c49eb0fb4b0ecd23b95262cc91631b8052f02962f5e13eb35622f4569784f6ed",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n \"first_name\": \"{{updatedFirstname}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://reqres.in/api/users/7",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "users",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "error_4xx",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var responseBody = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Validate client error status\", () => {\r",
+              "    pm.expect(pm.response.code).to.be.within(400, 499);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate empty response body\", () => {\r",
+              "    pm.expect(responseBody).to.eql({});\r",
+              "});\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"invalidUserId\", 5500);\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "pub_c49eb0fb4b0ecd23b95262cc91631b8052f02962f5e13eb35622f4569784f6ed",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://reqres.in/api/uer/{{invalidUserId}}",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "uer",
+            "{{invalidUserId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "list_of_users",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// pm.test(\"Status code is 200\", function () {\r",
+              "//     pm.response.to.have.status(200);\r",
+              "// });\r",
+              "\r",
+              "// var responseBody = pm.response.json();\r",
+              "// const data = response.data;\r",
+              "\r",
+              "// pm.test(\"Verify email\", function () {\r",
+              "//     pm.expect(data.email).to.eql(\"saziaafrin711@gmail.com\");\r",
+              "// });\r",
+              "\r",
+              "// pm.test(\"ID exists\", function () {\r",
+              "//     pm.expect(data.id).to.be.a(\"string\");\r",
+              "//     pm.expect(data.id.length).to.be.greaterThan(0);\r",
+              "// });\r",
+              "\r",
+              "// pm.test(\"Status is active\", function () {\r",
+              "//     pm.expect(data.status).to.eql(\"active\");\r",
+              "// });\r",
+              "\r",
+              "// pm.test(\"Project ID is correct\", function () {\r",
+              "//     pm.expect(data.project_id).to.eql(20810);\r",
+              "// });\r",
+              "\r",
+              "// pm.test(\"Verify name\", function () {\r",
+              "//     pm.expect(data.name).to.eql(\"Sazia Afrin\");\r",
+              "// });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "pub_c49eb0fb4b0ecd23b95262cc91631b8052f02962f5e13eb35622f4569784f6ed",
+            "type": "text"
+          },
+          {
+            "key": "",
+            "value": "",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"id\": 2,\r\n  \"email\": \"janet.weaver@reqres.in\",\r\n  \"first_name\": \"janeeeeeeee\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://reqres.in/api/users?page=1",
+          "protocol": "https",
+          "host": [
+            "reqres",
+            "in"
+          ],
+          "path": [
+            "api",
+            "users"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "expectedFirstName",
+      "value": ""
+    },
+    {
+      "key": "expectedEmail",
+      "value": ""
+    },
+    {
+      "key": "updatedemail",
+      "value": ""
+    },
+    {
+      "key": "updatedFirstname",
+      "value": ""
+    },
+    {
+      "key": "invalidUserId",
+      "value": ""
+    },
+    {
+      "key": "invalidFirstName",
+      "value": ""
+    },
+    {
+      "key": "invalidLastName",
+      "value": ""
+    }
+  ]
+}
