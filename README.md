@@ -86,7 +86,7 @@ Validate product sorting, add to cart, and checkout.
 ## Clone Repository
 
 ```bash
-git clone <repository_url>
+git clone https://github.com/Dima-1171/Ostad_Assignment_02.git
 ```
 
 ## Install Dependencies
