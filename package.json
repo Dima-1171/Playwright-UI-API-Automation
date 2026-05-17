@@ -13,8 +13,7 @@
     "Senario_2": "npx playwright test --headed Senario_02.spec.js",
     "Senario_3": "npx playwright test --headed Senario_03.spec.js",
     "show_repo": "npx playwright show-report",
-    "getreport" : "npx allure generate allure-results --clean && npx allure open allure-report",
-    // "Api_run" : "newman run "C:\Users\sazia\OneDrive\Desktop\PLAYWRITE_OSTAD\Api_testing\02_Api_test.json""
+    "getreport" : "npx allure generate allure-results --clean && npx allure open allure-report"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
