@@ -17,6 +17,7 @@ let product;
 
   test.beforeEach(async ({ page }) => {
     await page.goto("https://www.saucedemo.com/");
+    // await page.goto("https://www.saucedemo.com/", { waitUntil: 'domcontentloaded' });
   });
 
   test("Validate Sort, Add To Cart First Item and Checkout", async ({ page }) => {
@@ -25,17 +26,21 @@ let product;
   
     await profile.login(Username, password);
     await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(2000);
+    // await page.waitForTimeout(2000);
     await expect(page).toHaveTitle("Swag Labs");
     await page.waitForTimeout(2000);
     await profile.ResetState();
+    await page.waitForURL("**/inventory.html");
+    await expect(product.sortContainer).toBeVisible();
+    await page.waitForTimeout(2000);
+    await product.sortContainer.selectOption('za');
+    // await page.waitForTimeout(2000);
     await product.addToCartButtonFirstItem();
     await product.clickOnCart();
     await page.waitForURL("**/cart.html");
     await product.clickButton("Checkout");
-    await profile.CheckOut( firstName, lastName, postalCode);
+    await profile.CheckOut_validate_addFirstItem_Price( firstName, lastName, postalCode);
     await profile.Logout();
-    await page.waitForTimeout(2000);
   });
 
 });

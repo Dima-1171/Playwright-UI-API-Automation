@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 import { Profile } from '../pageObjects/profile';
 import { Product } from '../pageObjects/product';
 
+test.setTimeout(60000);
 
 const Username = "standard_user";
 const password = "secret_sauce";
@@ -37,7 +38,7 @@ let product;
     await page.waitForURL("**/cart.html");
     await product.clickButton("Checkout");
     await page.waitForTimeout(2000);
-    await profile.CheckOut( firstName, lastName, postalCode);
+    await profile.CheckOut_validate_Name_TotalPrice( firstName, lastName, postalCode);
     await profile.Logout();
   });
 
