@@ -12,7 +12,7 @@ const lastName = "Afrin";
 const postalCode = "1234";
 
 test.describe("Add To Cart", () => {
-test.describe("Login with locked user tests", () => {
+test.describe("Login with standard_user tests", () => {
 let profile;
 let product;
 
@@ -20,7 +20,7 @@ let product;
     await page.goto("https://www.saucedemo.com/");
   });
 
-  test("Validate Add To Cart and Checkout", async ({ page }) => {
+  test("Validate Add To Cart, Checkout, total price", async ({ page }) => {
    profile = new Profile(page);
    product = new Product(page);
   
