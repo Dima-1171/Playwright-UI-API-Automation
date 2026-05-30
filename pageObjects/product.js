@@ -10,16 +10,8 @@ export class Product extends BasePage {
     this.cartId = this.page.locator('[id="shopping_cart_container"]');
     this.addToCart = this.page.getByText("Add to cart");
     this.sortContainer = this.page.locator('[data-test="product-sort-container"]');
-    // this.sortZtoA = this.page.locator('[data-test="active-option"]');
   }
 
-  // sortContainer(){
-  //   return this.page.locator(['data-test="product_sort_container"']);
-  // }
-
-  // sortZtoA(){
-  //   return this.page.locator(['data-test="active-option"']);
-  // }
  
     getFirstSortedProduct() {
     return [...products].sort((a, b) => b.localeCompare(a))[0];;
@@ -36,7 +28,6 @@ export class Product extends BasePage {
 
 async  addToCartButtonFirstItem() {
     await this.firstItemGet().click();
-    // await this.addToCart.click();
 }
 
 addToCartButton(itemName) {
@@ -53,9 +44,7 @@ async clickOnCart() {
      await this.page.waitForURL("**/cart.html");
 }
 
-// async match_firstItem(){
-// await expect(this.firstItemGet).toContainEqual.firstItemFromList();
-// }
+
 
 
 }
