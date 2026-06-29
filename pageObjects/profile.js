@@ -4,7 +4,7 @@ import { BasePage} from "./basePage";
 export class Profile extends BasePage {
   constructor(page) {
     super(page);
-    this.UsernameInput = this.page.getByRole("textbox", { name: "Username" });
+    this.usernameInput = this.page.getByRole("textbox", { name: "Username" });
     this.passwordInput = this.page.getByRole("textbox", { name: "Password" });
     this.usernameErrorMessage = this.page.getByText("Epic sadface: Sorry, this user has been locked out.");
     this.successMsg = this.page.getByText("Thank you for your order!"); 
@@ -17,20 +17,20 @@ export class Profile extends BasePage {
 }
 
 
-MenuLocator(){
+menuLocator(){
        return this.page.getByRole('button', { name: 'Open Menu' });
 }
 
- ResetAppLocator() {
+ resetAppLocator() {
     return this.page.getByText("Reset App State");
   }
 
- LogoutLocator() {
+ logoutLocator() {
     return this.page.getByText("Logout");
   }  
 
 
-CloseMenuLocator(){
+closeMenuLocator(){
        return this.page.getByRole('button', { name: 'Close Menu' });
 }
 
@@ -44,7 +44,7 @@ continueLocator(){
 }
 
   async enterUserName(Username) {
-    await this.UsernameInput.fill(Username);
+    await this.usernameInput.fill(Username);
   }
 
   async enterPassword(password) {
@@ -66,7 +66,7 @@ continueLocator(){
   }
 
 
-async Totalprice() {
+async totalPrice() {
 
 const itemTotalText = await this.page.locator('[data-test="subtotal-label"]').textContent();
 
@@ -86,14 +86,14 @@ expect(total).toStrictEqual(expectedTotal, 2);
 
 }
 
-  async login(Username, password) {
+  async loginUser(Username, password) {
     await this.enterUserName(Username);
     await this.enterPassword(password);
     await this.clickButton("Login");
     await this.page.waitForTimeout(2000);
   }
 
- async CheckOut_validate_Name_TotalPrice( firstName, lastName, postalCode) {
+ async checkout_Validate_Name_And_TotalPrice( firstName, lastName, postalCode) {
     await this.enterFirstName(firstName);
     await this.enterSecondName(lastName);
     await this.enterPostalCode(postalCode);
@@ -103,37 +103,37 @@ expect(total).toStrictEqual(expectedTotal, 2);
     await expect(this.page.locator('[data-test="item-1-title-link"]')).toBeVisible();
     await expect(this.page.locator('[data-test="item-4-title-link"]')).toBeVisible();
     await expect(this.page.locator('[data-test="item-0-title-link"]')).toBeVisible();
-    await this.Totalprice();
-     await this.clickButton("Finish");
+    await this.totalPrice();
+    await this.clickButton("Finish");
     await expect(this.successMsg).toBeVisible();
   }
 
-   async CheckOut_validate_addFirstItem_Price( firstName, lastName, postalCode) {
+   async checkout_Validate_AddToCart_FirstItem_And_TotalPrice( firstName, lastName, postalCode) {
     await this.enterFirstName(firstName);
     await this.enterSecondName(lastName);
     await this.enterPostalCode(postalCode);
     await this.continueLocator().click();
     await this.page.waitForURL("**/checkout-step-two.html");
     await expect(this.page.locator('[data-test="item-3-title-link"]')).toBeVisible();
-    await this.Totalprice();
+    await this.totalPrice();
      await this.clickButton("Finish");
     await expect(this.successMsg).toBeVisible();
   }
 
-async ResetState(){
-  await this.MenuLocator().click();
-  await this.ResetAppLocator().click();
+async resetState(){
+  await this.menuLocator().click();
+  await this.resetAppLocator().click();
   await this.page.waitForTimeout(2000);
-  await this.CloseMenuLocator().click();
+  await this.closeMenuLocator().click();
   await this.page.waitForTimeout(2000);
 }  
 
-async Logout(){
+async logoutUser(){
 await this.page.waitForLoadState('networkidle'); 
-await this.MenuLocator().click();
+await this.menuLocator().click();
 await expect(this.hiddenMenuLocator()).toBeVisible();
-await this.ResetAppLocator().click();
-await this.LogoutLocator().click();
+await this.resetAppLocator().click();
+await this.logoutLocator().click();
 await this.page.waitForURL("https://www.saucedemo.com/");
 } 
 

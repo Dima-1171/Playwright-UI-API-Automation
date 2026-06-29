@@ -7,7 +7,7 @@ const products = ["Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bo
 export class Product extends BasePage {
   constructor(page) {
     super(page);
-    this.cartId = this.page.locator('[id="shopping_cart_container"]');
+    this.cartIdLink = this.page.locator('[id="shopping_cart_container"]');
     this.addToCart = this.page.getByText("Add to cart");
     this.sortContainer = this.page.locator('[data-test="product-sort-container"]');
   }
@@ -40,11 +40,9 @@ async clickOnAddToCart(itemName) {
 }
 
 async clickOnCart() {
-    await this.cartId.click();
+    await this.cartIdLink.click();
      await this.page.waitForURL("**/cart.html");
 }
-
-
 
 
 }

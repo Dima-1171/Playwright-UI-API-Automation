@@ -17,7 +17,7 @@ let profile;
 
   test("Validate login with locked user", async ({ page }) => {
    profile = new Profile(page);
-    await profile.login(Username, password);
+    await profile.loginUser(Username, password);
     await page.waitForLoadState("networkidle");
     await expect(profile.usernameErrorMessage).toBeVisible();
   });

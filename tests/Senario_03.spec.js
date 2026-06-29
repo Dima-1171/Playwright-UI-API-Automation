@@ -23,11 +23,11 @@ let product;
    profile = new Profile(page);
    product = new Product(page);
   
-    await profile.login(Username, password);
+    await profile.loginUser(Username, password);
     await page.waitForLoadState("networkidle");
     await expect(page).toHaveTitle("Swag Labs");
     await page.waitForTimeout(2000);
-    await profile.ResetState();
+    await profile.resetState();
     await page.waitForURL("**/inventory.html");
     await expect(product.sortContainer).toBeVisible();
     await page.waitForTimeout(2000);
@@ -36,8 +36,8 @@ let product;
     await product.clickOnCart();
     await page.waitForURL("**/cart.html");
     await product.clickButton("Checkout");
-    await profile.CheckOut_validate_addFirstItem_Price( firstName, lastName, postalCode);
-    await profile.Logout();
+    await profile.checkout_Validate_AddToCart_FirstItem_And_TotalPrice( firstName, lastName, postalCode);
+    await profile.logoutUser();
   });
 
 });

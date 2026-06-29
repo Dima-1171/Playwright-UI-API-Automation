@@ -15,7 +15,4 @@ export class BasePage {
     await this.buttonLocator(button).hover();
   }
 
-  async doGetButtonName(button) {
-    return await this.buttonLocator(button).getInnerText();
-  }
 }

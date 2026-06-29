@@ -24,12 +24,12 @@ let product;
    profile = new Profile(page);
    product = new Product(page);
   
-    await profile.login(Username, password);
+    await profile.loginUser(Username, password);
     await page.waitForLoadState("networkidle");
     await page.waitForTimeout(2000);
     await expect(page).toHaveTitle("Swag Labs");
     await page.waitForTimeout(2000);
-    await profile.ResetState();
+    await profile.resetState();
     await page.waitForTimeout(2000);
     await product.clickOnAddToCart("sauce-labs-backpack");
     await product.clickOnAddToCart("sauce-labs-bolt-t-shirt");
@@ -38,8 +38,8 @@ let product;
     await page.waitForURL("**/cart.html");
     await product.clickButton("Checkout");
     await page.waitForTimeout(2000);
-    await profile.CheckOut_validate_Name_TotalPrice( firstName, lastName, postalCode);
-    await profile.Logout();
+    await profile.checkout_Validate_Name_And_TotalPrice( firstName, lastName, postalCode);
+    await profile.logoutUser();
   });
 
 });
